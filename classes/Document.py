@@ -16,7 +16,7 @@ class Document:
     def store_contents(self):
         """
         Reads in the file's contents and stores it in self.contents.
-        :return: list: the contents of the file.
+        :return: None.
         """
         contents = list()
         with open(self.file_path, "r", encoding=self.encoding) as f:
@@ -30,8 +30,7 @@ class Document:
                             pos += 1
                 except UnicodeDecodeError:
                     pass
-
-        return contents
+        self.contents = contents
 
     def get_embeddings(self):
         """
