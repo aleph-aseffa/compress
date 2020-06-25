@@ -35,8 +35,8 @@ class Document:
     def get_embeddings(self):
         """
         Only to be called on the word embeddings file.
-        Extracts the word embeddings and stores them as a dictionary.
-        :return: dict: the word embeddings.
+        Extracts the word embeddings and stores them as a dictionary in self.contents.
+        :return: None.
         """
         word_embeddings = dict()
 
@@ -49,5 +49,4 @@ class Document:
             word_embeddings[word] = coefs
         f.close()
 
-        return word_embeddings
-
+        self.contents = word_embeddings
