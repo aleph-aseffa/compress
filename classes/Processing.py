@@ -7,8 +7,12 @@ from nltk.corpus import stopwords
 class Processing:
 
     def __init__(self, doc):
-        self.curr_text = doc.contents
-        self.stop_words = None
+        """
+        Initialize the class.
+        :param doc: an instance of the Document class whose contents have been read in.
+        """
+        self.curr_text = doc.contents  # contents of the article to be summarized.
+        self.stop_words = None  # English language stop words.
 
     def get_stop_words(self):
         """
