@@ -66,14 +66,3 @@ class Processing:
         :return: str: the processed text.
         """
         return self.curr_text
-
-
-
-
-
-    """
-    tokenize by sentence
-    remove punctuations, numbers, special characters
-    lowercase
-    stopword removal
-    """
