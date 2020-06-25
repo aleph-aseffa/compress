@@ -11,7 +11,7 @@ class Similarity:
         :param processed: (Document) the article to summarize; must have been fully processed.
         :param embeddings: (Document), contains the word embeddings.
         """
-        self.processed_text = processed.curr_text  # processed contents of the article to summarize.
+        self.processed_text = processed.contents  # processed contents of the article to summarize.
         self.word_embeddings = embeddings.contents  # word embeddings.
         self.vectors = None  # stores the vectors for each sentence in the article.
         self.matrix = None  # stores the similarity matrix.
