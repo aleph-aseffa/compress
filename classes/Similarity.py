@@ -5,13 +5,15 @@ import networkx as nx
 
 class Similarity:
 
-    def __init__(self, processed, embeddings):
+    def __init__(self, original, processed, embeddings):
         """
         Initializes the Similarity class.
-        :param processed: (Document) the article to summarize; must have been fully processed.
+        :param original, (Document) the original article (before processing).
+        :param processed: (Processing) the article after processing.
         :param embeddings: (Document), contains the word embeddings.
         """
-        self.processed_text = processed.contents  # processed contents of the article to summarize.
+        self.original_text = original.contents  # the original contents of the article.
+        self.processed_text = processed.curr_text  # processed contents of the article to summarize.
         self.word_embeddings = embeddings.contents  # word embeddings.
         self.vectors = None  # stores the vectors for each sentence in the article.
         self.matrix = None  # stores the similarity matrix.
@@ -41,12 +43,11 @@ class Similarity:
         Stored in self.matrix.
         :return: None.
         """
-        similarity_matrix = np.zeros(len(self.processed_text), len(self.processed_text))
+        similarity_matrix = np.zeros([len(self.processed_text), len(self.processed_text)])
         for i in range(len(self.processed_text)):
             for j in range(len(self.processed_text)):
                 if i != j:
-                    similarity_matrix[i][j] = cosine_similarity(self.vectors[i].reshape(1, 100),
-                                                                self.vectors[j].reshape(1, 100))[0, 0]
+                    similarity_matrix[i][j] = cosine_similarity(self.vectors[i].reshape(1, 100), self.vectors[j].reshape(1, 100))[0, 0]
         self.matrix = similarity_matrix
 
     def score_similarities(self):
@@ -84,7 +85,9 @@ class Similarity:
         summary_list = [self.ranked_sentences[sentence][1] for sentence in range(n)]
         summary_list.sort(key=lambda x: x[1])
 
-        summary = " ".join(summary_list)
+        # get the original sentences and combine them to create the summary.
+        summary = [self.original_text[item[1]][0] for item in summary_list]
+        summary = ".\n".join(summary)
 
         return summary
 
