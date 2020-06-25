@@ -6,12 +6,17 @@ import networkx as nx
 class Similarity:
 
     def __init__(self, processed, embeddings):
-        self.processed_text = processed.curr_text
-        self.word_embeddings = embeddings.contents
-        self.vectors = None
-        self.matrix = None
-        self.scores = None
-        self.ranked_sentences = None
+        """
+        Initializes the Similarity class.
+        :param processed: (Document) the article to summarize; must have been fully processed.
+        :param embeddings: (Document), contains the word embeddings.
+        """
+        self.processed_text = processed.curr_text  # processed contents of the article to summarize.
+        self.word_embeddings = embeddings.contents  # word embeddings.
+        self.vectors = None  # stores the vectors for each sentence in the article.
+        self.matrix = None  # stores the similarity matrix.
+        self.scores = None  # stores the scores for each sentence in the article (in terms of similarity).
+        self.ranked_sentences = None  # orders the sentences by similarity.
 
     def create_vectors(self):
         """
