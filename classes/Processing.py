@@ -9,7 +9,6 @@ class Processing:
     def __init__(self, doc):
         self.curr_text = doc.contents
         self.stop_words = None
-        self.get_stop_words()
 
     def get_stop_words(self):
         """
