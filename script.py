@@ -24,7 +24,7 @@ def main():
     article_processor.remove_stopwords()
 
     # analyze the document
-    analyzer = sim.Similarity(article, embeddings)
+    analyzer = sim.Similarity(article, article_processor, embeddings)
     analyzer.create_vectors()
     analyzer.generate_similarity_matrix()
     analyzer.score_similarities()
@@ -34,6 +34,9 @@ def main():
     summary = analyzer.extract_summary(15)
     print(summary)
 
+
+if __name__ == "__main__":
+    main()
 
 
 
